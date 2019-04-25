@@ -16,7 +16,8 @@ router.get('/categories', async (req, res, next) => {
 
 router.get('/cashflow', async (req, res, next) => {
   try {
-    res.status(501).json({ message: 'Not Implemented' });
+    let list = new insightsList();
+    res.send(list.orderByDate(dummyData))
   } catch (err) {
     return next(err);
   }

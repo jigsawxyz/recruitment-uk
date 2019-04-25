@@ -6,7 +6,7 @@ chai.should();
 
 async function request(path) {
   return rp({
-    url: `https://transactions.spokedev.xyz/transactions'`,
+    url: `http://localhost:3000/insights/${path}`,
     method: 'GET',
     json: true,
   });
@@ -23,13 +23,8 @@ describe('InsightsList', () => {
       expect(insightsList.data).to.be.null;
     });
 
-    xit('should contain a method that sets data from get, and set as this.data',()=>{
-       expect(insightsList.getData()).toBe(true)
-       expect(insightsList.data).to.be(true)
-    });
-
-    xit('should return data from the api call', async ()=>{
-      const result  = await insightsList.getData();
+    it('should return data from the api call', async ()=>{
+      const result  = await request('/categories');
       result.statusCode.should.equal(200)
     })
   });
@@ -50,7 +45,7 @@ describe('InsightsList', () => {
           }
         }
         result = JSON.stringify(result);
-        
+
         console.log(`**** ${insightList.orderByCategory(dummyData)}`)
         expect(insightList.orderByCategory(dummyData)).to.equal(result)
     })
