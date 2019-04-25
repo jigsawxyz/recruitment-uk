@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const insightsList = require('../../lib/insightsList')
+const dummyData = require('../../lib/transactionsData')
 
 router.get('/categories', async (req, res, next) => {
   try {
-    res.status(501).json({ message: 'Not Implemented' });
+    let list = new insightsList();
+
+    res.send(list.orderByCategory(dummyData))
+
   } catch (err) {
     return next(err);
   }
