@@ -2,7 +2,6 @@ const chai = require('chai');
 const {expect} = require('chai');
 const rp = require('request-promise');
 const InsightsList = require('../lib/insightsList')
-const dummyData = require('../lib/transactionsData')
 chai.should();
 
 async function request(path) {
@@ -36,8 +35,24 @@ describe('InsightsList', () => {
   });
 
   describe('#orderByCategory',()=>{
-    it('will take an list of objects then order them by category', ()=>{
 
+    const dummyData = [
+      {"id":1,"amount":1798,"merchant":"Sainsburys","category":"Groceries","paymentDate":"2019-02-14T10:40:33.516Z"},
+
+    ]
+    it('will take an list of objects then return an result object', ()=>{
+        var insightList = new InsightsList();
+        let result = {
+          "Groceries": {
+            "totalNumber": 1,
+            "totalValue": 1798,
+            "averageValue": 1798
+          }
+        }
+        result = JSON.stringify(result);
+        
+        console.log(`**** ${insightList.orderByCategory(dummyData)}`)
+        expect(insightList.orderByCategory(dummyData)).to.equal(result)
     })
   })
 });
