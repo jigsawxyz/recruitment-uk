@@ -1,6 +1,102 @@
-# Insights Service
+# Insights App - FE challenge
 
-As part of out latest MVP build we need to present a user with some insights about their spending. We need to build a server that returns JSON formatted insights. A list of transactions for a user can be retrieved at `GET https://transactions.spokedev.xyz/transactions`. (Make sure you use https!!!). The server should fetch this list, then calculate the insights below, and return them in the body of the response with a 200 response code. 
+As part of out latest MVP build we need to present a user with some insights about their spending. We need to build an application (React or React Native) that displays insights on their transactioinos. A list of transactions for a user can be retrieved at `GET https://gist.githubusercontent.com/simeor/5dd52dccdf5c4b4183ab2f2e80728bec/raw/5d042617ce514687fedffba35ec04539cb173481/data.json`. The applicatiion should fetch this list, then calculate the insights below, and display them in a style of your choosing.
+
+The api returns an array of transactions:
+
+```json
+[
+  {
+    "id": 1,
+    "amount": 100,
+    "merchant": "Tescos Ltd",
+    "category": "food",
+    "paymentDate": "2019-01-27T14:24:48.960Z"
+  },
+  {
+    "id": 2,
+    "amount": 20,
+    "merchant": "TFL London",
+    "category": "transport",
+    "paymentDate": "2019-02-27T14:24:48.960Z"
+  }
+]
+```
+
+1. `Categories`
+
+User Story:
+
+```
+As a User
+So that I can gain an understanding of my finances
+I want to see an aggregated list of my transactions by category
+```
+
+Displays the number, total and average value of all transactions grouped by the transaction category as well as the transactions themselves.
+
+The category grouped object should be as follows
+
+```json
+{
+  "food": {
+    "totalNumber": 10,
+    "totalValue": 400,
+    "averageValue": 40,
+  },
+  ...
+}
+```
+
+2. `Cashflow`
+
+User Story:
+
+```
+As a User
+So that I can gain an understanding of if i will run out of money
+I want to see a breakdown of my spending by month
+```
+
+Displays a daily cashflow of all transactions grouped by day as well as the transactions themselves. For days on which there is no data return 0 for all fields.
+
+```json
+{
+  "01/01/2019": {
+    "totalNumber": 10,
+    "totalValue": 400,
+    "averageValue": 40
+  },
+  "02/01/2019": {
+    "totalNumber": 10,
+    "totalValue": 400,
+    "averageValue": 40
+  }
+}
+```
+
+Create your own solution in a seperate repo and submit it.
+
+There are no requirements for the layout or routing fo your app, make them as you see fit.
+
+## Some notes
+
+1. All values are integer. Display values must be floats to 2 decimal places.
+2. You can use any npm package you like.
+3. BONUS marks for using Typescript.
+4. BONUS BONUS marks for using Typescript with no `any` types.
+
+## Things we value
+
+1. Well tested code. Whatever framework you use, we like testing our code to have certainty it works
+2. Simple code. It shouldn't take a PHD to understand code. If it's that complicated, we've done something wrong.
+3. Code reuse. If there's an option to reuse some code, go for it!
+
+---
+
+# Insights Service - BE challenge
+
+As part of out latest MVP build we need to present a user with some insights about their spending. We need to build a server that returns JSON formatted insights. A list of transactions for a user can be retrieved at `GET https://gist.githubusercontent.com/simeor/5dd52dccdf5c4b4183ab2f2e80728bec/raw/5d042617ce514687fedffba35ec04539cb173481/data.json`. (Make sure you use https!!!). The server should fetch this list, then calculate the insights below, and return them in the body of the response with a 200 response code.
 
 The api returns an array of transactions:
 
@@ -27,13 +123,13 @@ From this list we'll need to build a server that exposes the following routes, w
 
 1. `GET /insights/categories`
 
-User Story: 
+User Story:
+
 ```
 As a User
 So that I can gain an understanding of my finances
 I want to see an aggregated list of my transactions by category
 ```
-
 
 returns the number, total and average value of all transactions grouped by the transaction category.
 
@@ -51,13 +147,14 @@ returns the number, total and average value of all transactions grouped by the t
 2. `GET /insights/cashflow`
 
 User Story:
+
 ```
 As a User
 So that I can gain an understanding of if i will run out of money
 I want to see a breakdown of my spending by month
 ```
 
-returns a daily cashflow of all transactions grouped by day. For days on which there is no data return 0 for all fields. 
+returns a daily cashflow of all transactions grouped by day. For days on which there is no data return 0 for all fields.
 
 ```json
 {
@@ -70,12 +167,9 @@ returns a daily cashflow of all transactions grouped by day. For days on which t
     "totalNumber": 10,
     "totalValue": 400,
     "averageValue": 40
-  },
+  }
 }
 ```
-
-3. Is a suprise! Will work on it together in person :)
-
 
 ## To Get Started
 
